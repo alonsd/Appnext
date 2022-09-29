@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/text_view_dashboard_title"
+        style="@style/H1_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/dashboard_fragment_daily_activity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_daily_goal"
+        style="@style/H2_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36.5dp"
+        android:text="@string/dashboard_fragment_daily_goal"
+        app:layout_constraintStart_toStartOf="@+id/text_view_dashboard_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dashboard_title" />
+
+    <TextView
+        android:id="@+id/text_view_daily_goal_subtitle"
+        style="@style/H3_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dashboard_fragment_be_active_be_healthy_set_goals"
+        app:layout_constraintStart_toStartOf="@+id/text_view_daily_goal"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_daily_goal" />
+
+    <View
+        android:id="@+id/dashboard_view_separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="#F2F2F2"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_daily_goal_subtitle"
+        tools:layout_editor_absoluteX="48dp" />
+
+    <TextView
+        android:id="@+id/text_view_weekly_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
+        android:text="@string/dashboard_fragment_weekly_progress"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/text_view_daily_goal_subtitle"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_view_separator" />
+
+    <TextView
+        android:id="@+id/text_view_weekly_progress_subtitle"
+        style="@style/H3_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dashboard_fragment_set_realistic_goals"
+        app:layout_constraintStart_toStartOf="@+id/text_view_weekly_progress"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_weekly_progress" />
+
+    <com.mikhaellopez.circleview.CircleView
+        android:id="@+id/circleview_activity_color"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginEnd="3dp"
+        app:cv_color="@color/blue"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_activity_color_explanation"
+        app:layout_constraintEnd_toStartOf="@+id/text_view_activity_color_explanation"
+        app:layout_constraintTop_toTopOf="@+id/text_view_activity_color_explanation" />
+
+    <TextView
+        android:id="@+id/text_view_activity_color_explanation"
+        style="@style/H4_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        android:text="@string/dashboard_fragment_activity_color_explanation"
+        app:layout_constraintBottom_toBottomOf="@+id/circleView_daily_goal_color"
+        app:layout_constraintEnd_toStartOf="@+id/circleView_daily_goal_color"
+        app:layout_constraintTop_toTopOf="@+id/circleView_daily_goal_color" />
+
+
+    <com.mikhaellopez.circleview.CircleView
+        android:id="@+id/circleView_daily_goal_color"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginEnd="3dp"
+        app:cv_color="@color/green"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_daily_goal_color_explanation"
+        app:layout_constraintEnd_toStartOf="@+id/text_view_daily_goal_color_explanation"
+        app:layout_constraintTop_toTopOf="@+id/text_view_daily_goal_color_explanation" />
+
+    <TextView
+        android:id="@+id/text_view_daily_goal_color_explanation"
+        style="@style/H4_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/dashboard_fragment_daily_goal_color_explanation"
+        app:layout_constraintEnd_toEndOf="@+id/text_view_timeline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_timeline" />
+
+    <TextView
+        android:id="@+id/text_view_timeline"
+        style="@style/H3_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/rounded_shape_button"
+        android:paddingHorizontal="12.5dp"
+        android:paddingVertical="5dp"
+        android:text="@string/dashboard_fragment_timeline"
+        android:textColor="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_view_weekly_progress" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

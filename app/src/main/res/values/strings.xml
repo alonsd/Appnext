@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Appnext</string>
+    <string name="dashboard_fragment_daily_activity">Daily Activity</string>
+    <string name="dashboard_fragment_daily_goal">Daily Goal</string>
+    <string name="dashboard_fragment_be_active_be_healthy_set_goals">Be active. Be healthy. Set goals.</string>
+    <string name="dashboard_fragment_weekly_progress">Weekly Progress</string>
+    <string name="dashboard_fragment_set_realistic_goals">Set realistic goals</string>
+    <string name="dashboard_fragment_activity_color_explanation">Activity</string>
+    <string name="dashboard_fragment_daily_goal_color_explanation">Daily goal</string>
+    <string name="dashboard_fragment_timeline">Timeline</string>
+</resources>
