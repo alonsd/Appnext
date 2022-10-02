@@ -1,19 +1,29 @@
 package com.appnext.utils.extensions
 
-import android.app.Activity
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import androidx.fragment.app.Fragment
-import com.appnext.utils.constants.SharedPreferences.BASIC_APPLICATIONS_SHARED_PREFERENCES
+import com.appnext.utils.application.App
+import com.appnext.utils.constants.SharedPreferences.APPNEXT_SHARED_PREFERENCES
+import com.appnext.utils.constants.SharedPreferences.LAST_TIME_DATA_FETCHED
+
+
+var SharedPreferences.lastTimeDataFetch
+    get() = getLong(LAST_TIME_DATA_FETCHED, 0)
+    set(value) {
+        editSharedPreferences { editor ->
+            editor.put(LAST_TIME_DATA_FETCHED to value)
+        }
+    }
 
 
 val Fragment.sharedPreferences: SharedPreferences
-    get() =
-        requireActivity().getSharedPreferences(BASIC_APPLICATIONS_SHARED_PREFERENCES, MODE_PRIVATE)
+    get() = requireActivity().getSharedPreferences(APPNEXT_SHARED_PREFERENCES, MODE_PRIVATE)
 
-val Activity.sharedPreferences: SharedPreferences
-    get() =
-        getSharedPreferences(BASIC_APPLICATIONS_SHARED_PREFERENCES, MODE_PRIVATE)
+val sharedPreferences: SharedPreferences
+    get() = App.applicationContext().getSharedPreferences(APPNEXT_SHARED_PREFERENCES, MODE_PRIVATE)
+
 
 private fun SharedPreferences.editSharedPreferences(operation: (SharedPreferences.Editor) -> Unit) {
     val editSharePreferences = edit()

@@ -1,10 +1,10 @@
 package com.appnext.service_locator
 
-import com.appnext.data.repository.DashboardRepository
+import com.appnext.data.repository.AppnextRepository
 import org.koin.dsl.module
 
 
 val repositoryModule = module {
 
-    single { DashboardRepository(get(), get()) }
+    single { AppnextRepository(get(), get()) }
 }

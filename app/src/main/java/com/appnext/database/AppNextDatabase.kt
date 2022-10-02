@@ -6,12 +6,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.appnext.data.source.local.dao.AppNextDao
 import com.appnext.database.converter.DatabaseConverter
-import com.appnext.model.entities.AppNextEntity
+import com.appnext.model.database.database_entities.DailyDataEntity
+import com.appnext.model.database.database_entities.DailyItemEntity
 import com.appnext.utils.application.App
 import com.appnext.utils.constants.Database.APP_NEXT_DATABASE
 
 
-@Database(entities = [AppNextEntity::class], version = 1, exportSchema = false)
+@Database(entities = [DailyDataEntity::class, DailyItemEntity::class], version = 1, exportSchema = false)
 @TypeConverters(DatabaseConverter::class)
 abstract class AppNextDatabase : RoomDatabase() {
 

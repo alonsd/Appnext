@@ -20,7 +20,7 @@ class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
     private lateinit var adapter : WeeklyProgressAdapter
 
-    //DI
+    //Dependency Injection
     private val dashboardViewModel = get<DashboardViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

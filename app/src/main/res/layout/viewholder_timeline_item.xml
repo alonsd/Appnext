@@ -4,18 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:paddingHorizontal="27dp"
     android:theme="@style/Main_Background">
+
+    <View
+        android:id="@+id/timeline_item_current_day_indicator"
+        android:layout_width="4dp"
+        android:layout_height="40dp"
+        android:layout_marginVertical="26dp"
+        android:layout_marginStart="26dp"
+        android:background="@color/blue"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/timeline_item_textview_current_day_number"
         style="@style/H2_Title_Black_Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="@+id/timeline_item_textview_current_day_name"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/timeline_item_current_day_indicator"
         tools:text="8" />
 
     <TextView
@@ -23,7 +33,9 @@
         style="@style/H4_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="26dp"
+        app:layout_constraintBottom_toBottomOf="@+id/timeline_item_current_day_indicator"
+        app:layout_constraintStart_toEndOf="@+id/timeline_item_current_day_indicator"
         app:layout_constraintTop_toBottomOf="@+id/timeline_item_textview_current_day_number"
         tools:text="Sun" />
 
@@ -95,6 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="26dp"
         app:layout_constraintBottom_toBottomOf="@+id/timeline_item_circleview_kcal_indicator"
         app:layout_constraintStart_toEndOf="@+id/timeline_item_circleview_kcal_indicator"
         app:layout_constraintTop_toTopOf="@+id/timeline_item_circleview_kcal_indicator"
@@ -106,6 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="26dp"
         app:layout_constraintBottom_toBottomOf="@+id/timeline_item_circleview_distance_indicator"
         app:layout_constraintStart_toEndOf="@+id/timeline_item_circleview_distance_indicator"
         app:layout_constraintTop_toTopOf="@+id/timeline_item_circleview_distance_indicator"

@@ -2,7 +2,7 @@ package com.appnext.ui.screens.dashboard.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.appnext.data.repository.DashboardRepository
+import com.appnext.data.repository.AppnextRepository
 import com.appnext.model.ui_models.WeeklyProgressListItem
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class DashboardViewModel(private val mainRepository: DashboardRepository) : ViewModel() {
+class DashboardViewModel(private val repository: AppnextRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
     val uiState = _uiState.asStateFlow()
@@ -23,7 +23,7 @@ class DashboardViewModel(private val mainRepository: DashboardRepository) : View
 
 
     private fun getWeeklyData() = viewModelScope.launch(Dispatchers.IO) {
-        when (val response = mainRepository.getWeeklyData()) {
+        when (val response = repository.getWeeklyProgressListItem()) {
             is NetworkResponse.Success -> {
                 _uiState.update {
                     it.copy(weeklyData = response.body, state = UiState.State.Data)
