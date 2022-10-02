@@ -6,9 +6,7 @@ import com.appnext.data.repository.AppnextRepository
 import com.appnext.model.ui_models.WeeklyProgressListItem
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class DashboardViewModel(private val repository: AppnextRepository) : ViewModel() {
@@ -16,14 +14,31 @@ class DashboardViewModel(private val repository: AppnextRepository) : ViewModel(
     private val _uiState = MutableStateFlow(UiState())
     val uiState = _uiState.asStateFlow()
 
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    private val uiEvent = _uiEvent.asSharedFlow()
+
+    private val _uiAction = MutableSharedFlow<UiAction>()
+    val uiAction = _uiAction.asSharedFlow()
+
 
     init {
         getWeeklyData()
+        observeUiEvent()
+    }
+
+    private fun observeUiEvent() = viewModelScope.launch {
+        uiEvent.collect { event ->
+            when (event) {
+                UiEvent.TimelineClicked -> {
+                    submitAction(UiAction.NavigateToTimelineScreen)
+                }
+            }
+        }
     }
 
 
     private fun getWeeklyData() = viewModelScope.launch(Dispatchers.IO) {
-        when (val response = repository.getWeeklyProgressListItem()) {
+        when (val response = repository.getWeeklyProgressItems()) {
             is NetworkResponse.Success -> {
                 _uiState.update {
                     it.copy(weeklyData = response.body, state = UiState.State.Data)
@@ -38,6 +53,14 @@ class DashboardViewModel(private val repository: AppnextRepository) : ViewModel(
         }
     }
 
+    private fun submitAction(uiAction: UiAction) = viewModelScope.launch {
+        _uiAction.emit(uiAction)
+    }
+
+    fun submitEvent(uiEvent: UiEvent) = viewModelScope.launch {
+        _uiEvent.emit(uiEvent)
+    }
+
     data class UiState(
         val weeklyData: List<WeeklyProgressListItem> = emptyList(),
         val errorMessage: String = "",
@@ -50,12 +73,12 @@ class DashboardViewModel(private val repository: AppnextRepository) : ViewModel(
         }
     }
 
-    sealed interface UiEvent{
-        object TimelineClicked
+    sealed interface UiEvent {
+        object TimelineClicked : UiEvent
     }
 
     sealed interface UiAction {
-        object NavigateToTimelineScreen
+        object NavigateToTimelineScreen : UiAction
     }
 
 }

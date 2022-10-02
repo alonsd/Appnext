@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.appnext.databinding.FragmentDashboardBinding
 import com.appnext.model.ui_models.WeeklyProgressListItem
 import com.appnext.ui.screens.dashboard.adapter.WeeklyProgressAdapter
@@ -18,7 +19,7 @@ class DashboardFragment : Fragment() {
 
     //UI Related
     private lateinit var binding: FragmentDashboardBinding
-    private lateinit var adapter : WeeklyProgressAdapter
+    private lateinit var adapter: WeeklyProgressAdapter
 
     //Dependency Injection
     private val dashboardViewModel = get<DashboardViewModel>()
@@ -31,7 +32,16 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initListeners()
         observeUiState()
+        observeUiActions()
+    }
+
+
+    private fun initListeners() {
+        binding.textViewTimeline.setOnClickListener {
+            dashboardViewModel.submitEvent(DashboardViewModel.UiEvent.TimelineClicked)
+        }
     }
 
     private fun observeUiState() = launchAndRepeatWithViewLifecycle {
@@ -48,6 +58,20 @@ class DashboardFragment : Fragment() {
                 DashboardViewModel.UiState.State.Initial -> Unit
             }
         }
+    }
+
+    private fun observeUiActions() = launchAndRepeatWithViewLifecycle {
+        dashboardViewModel.uiAction.collect { action ->
+            when(action) {
+                DashboardViewModel.UiAction.NavigateToTimelineScreen -> {
+                    navigateToTimelineScreen()
+                }
+            }
+        }
+    }
+
+    private fun navigateToTimelineScreen() {
+        findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToTimelineFragment())
     }
 
     private fun initAdapter(weeklyProgressListItems: List<WeeklyProgressListItem>) {

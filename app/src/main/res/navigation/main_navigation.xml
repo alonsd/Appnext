@@ -9,5 +9,18 @@
         android:id="@+id/dashboardFragment"
         android:name="com.appnext.ui.screens.dashboard.fragment.DashboardFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_timelineFragment"
+            app:destination="@id/timelineFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/timelineFragment"
+        android:name="com.appnext.ui.screens.timeline.fragment.TimelineFragment"
+        android:label="fragment_timeline"
+        tools:layout="@layout/fragment_timeline" />
 </navigation>

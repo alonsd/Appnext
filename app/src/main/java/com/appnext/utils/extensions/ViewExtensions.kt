@@ -23,7 +23,7 @@ inline fun Fragment.launchAndRepeatWithViewLifecycle(
 }
 
 fun <T, VH : RecyclerView.ViewHolder>
-        RecyclerView.setAdapter(
+        RecyclerView.setVerticalAdapter(
     context: Context,
     adapter: ListAdapter<T, VH>
 ) {

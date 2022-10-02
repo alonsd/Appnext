@@ -8,7 +8,8 @@ data class TimelineListItem(
     val currentDayName: String,
     @ColorRes val circularProgressBarColor: Int,
     val distanceMeters: String,
-    val kcal: String
+    val kcal: String,
+    val isToday : Boolean
 ) : DefaultAdapterDiffUtilCallback.ModelWithId{
     override fun fetchId(): String = currentDayNumber
 
