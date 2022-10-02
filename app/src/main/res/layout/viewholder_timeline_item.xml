@@ -1,128 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:theme="@style/Main_Background">
+    android:paddingHorizontal="6dp"
+    android:paddingVertical="13dp"
+    android:theme="@style/Main_Background"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:id="@+id/timeline_item_current_day_indicator"
-        android:layout_width="4dp"
-        android:layout_height="40dp"
-        android:layout_marginVertical="26dp"
-        android:layout_marginStart="26dp"
-        android:background="@color/blue"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
-
-    <TextView
-        android:id="@+id/timeline_item_textview_current_day_number"
-        style="@style/H2_Title_Black_Bold"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/timeline_item_textview_current_day_name"
-        app:layout_constraintTop_toTopOf="@+id/timeline_item_current_day_indicator"
-        tools:text="8" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/timeline_item_textview_current_day_name"
-        style="@style/H4_Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        app:layout_constraintBottom_toBottomOf="@+id/timeline_item_current_day_indicator"
-        app:layout_constraintStart_toEndOf="@+id/timeline_item_current_day_indicator"
-        app:layout_constraintTop_toBottomOf="@+id/timeline_item_textview_current_day_number"
-        tools:text="Sun" />
+        <View
+            android:id="@+id/timeline_item_current_day_indicator"
+            android:layout_width="4dp"
+            android:layout_height="40dp"
+            android:background="@color/blue"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
-    <View
-        android:id="@+id/timeline_item_separator_view"
-        android:layout_width="1dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/separator_view_color"
-        app:layout_constraintBottom_toBottomOf="@+id/timeline_item_textview_current_day_name"
-        app:layout_constraintStart_toEndOf="@+id/timeline_item_textview_current_day_number"
-        app:layout_constraintTop_toTopOf="@+id/timeline_item_textview_current_day_number" />
+        <TextView
+            android:id="@+id/timeline_item_textview_current_day_number"
+            style="@style/H2_Title_Black_Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/timeline_item_textview_current_day_name"
+            app:layout_constraintTop_toTopOf="@+id/timeline_item_current_day_indicator"
+            tools:text="8" />
 
-    <com.owl93.dpb.CircularProgressView
-        android:id="@+id/timeline_item_circularprogressview"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/timeline_item_separator_view"
-        app:layout_constraintStart_toEndOf="@+id/timeline_item_separator_view"
-        app:layout_constraintTop_toTopOf="@+id/timeline_item_separator_view"
-        app:strokeColor="@color/blue"
-        app:strokeWidth="4dp"
-        app:trackColor="@color/circular_progress_bar_base_color"
-        app:trackWidth="4dp" />
+        <TextView
+            android:id="@+id/timeline_item_textview_current_day_name"
+            style="@style/H4_Title"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:gravity="end"
+            app:layout_constraintBottom_toBottomOf="@+id/timeline_item_current_day_indicator"
+            app:layout_constraintStart_toEndOf="@+id/timeline_item_current_day_indicator"
+            app:layout_constraintTop_toBottomOf="@+id/timeline_item_textview_current_day_number"
+            tools:text="Sun" />
 
-    <TextView
-        android:id="@+id/timeline_item_steps_title"
-        style="@style/H4_Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/timeline_item_circularprogressview"
-        app:layout_constraintTop_toTopOf="@+id/timeline_item_circularprogressview"
-        tools:text="@string/viewholder_time_item_steps" />
+        <View
+            android:id="@+id/timeline_item_separator_view"
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/separator_view_color"
+            app:layout_constraintBottom_toBottomOf="@+id/timeline_item_textview_current_day_name"
+            app:layout_constraintStart_toEndOf="@+id/timeline_item_textview_current_day_number"
+            app:layout_constraintTop_toTopOf="@+id/timeline_item_textview_current_day_number" />
 
-    <TextView
-        android:id="@+id/timeline_item_steps_value"
-        style="@style/H1_Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/timeline_item_circularprogressview"
-        app:layout_constraintStart_toStartOf="@+id/timeline_item_steps_title"
-        app:layout_constraintTop_toBottomOf="@+id/timeline_item_steps_title"
-        tools:text="4000/5000" />
+        <com.owl93.dpb.CircularProgressView
+            android:id="@+id/timeline_item_circularprogressview"
+            android:layout_width="40dp"
+            app:maxValue="1.00"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/timeline_item_separator_view"
+            app:layout_constraintStart_toEndOf="@+id/timeline_item_separator_view"
+            app:layout_constraintTop_toTopOf="@+id/timeline_item_separator_view"
+            app:strokeColor="@color/blue"
+            app:strokeWidth="4dp"
+            app:trackColor="@color/circular_progress_bar_base_color"
+            app:trackWidth="4dp" />
 
-    <com.mikhaellopez.circleview.CircleView
-        android:id="@+id/timeline_item_circleview_kcal_indicator"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        app:cv_color="@color/blue"
-        app:layout_constraintStart_toEndOf="@+id/timeline_item_steps_value"
-        app:layout_constraintStart_toStartOf="@+id/timeline_item_circleview_distance_indicator"
-        app:layout_constraintTop_toTopOf="@+id/timeline_item_steps_title" />
+        <TextView
+            android:id="@+id/timeline_item_steps_title"
+            style="@style/H4_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/timeline_item_circularprogressview"
+            app:layout_constraintTop_toTopOf="@+id/timeline_item_circularprogressview"
+            android:text="@string/viewholder_time_item_steps" />
 
-    <com.mikhaellopez.circleview.CircleView
-        android:id="@+id/timeline_item_circleview_distance_indicator"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_marginStart="31dp"
-        app:cv_color="@color/blue"
-        app:layout_constraintBottom_toBottomOf="@+id/timeline_item_steps_value"
-        app:layout_constraintStart_toEndOf="@+id/timeline_item_steps_value"
-        app:layout_constraintTop_toBottomOf="@+id/timeline_item_circleview_kcal_indicator" />
+        <TextView
+            android:id="@+id/timeline_item_steps_value"
+            style="@style/H1_Title"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            app:layout_constraintBottom_toBottomOf="@+id/timeline_item_circularprogressview"
+            app:layout_constraintStart_toStartOf="@+id/timeline_item_steps_title"
+            app:layout_constraintTop_toBottomOf="@+id/timeline_item_steps_title"
+            tools:text="40000/5000" />
 
-    <TextView
-        android:id="@+id/timeline_item_kcal_value"
-        style="@style/H4_Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="26dp"
-        app:layout_constraintBottom_toBottomOf="@+id/timeline_item_circleview_kcal_indicator"
-        app:layout_constraintStart_toEndOf="@+id/timeline_item_circleview_kcal_indicator"
-        app:layout_constraintTop_toTopOf="@+id/timeline_item_circleview_kcal_indicator"
-        tools:text="50 KCAL" />
+        <com.mikhaellopez.circleview.CircleView
+            android:id="@+id/timeline_item_circleview_kcal_indicator"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:cv_color="@color/blue"
+            app:layout_constraintStart_toEndOf="@+id/timeline_item_steps_value"
+            app:layout_constraintStart_toStartOf="@+id/timeline_item_circleview_distance_indicator"
+            app:layout_constraintTop_toTopOf="@+id/timeline_item_steps_title" />
 
-    <TextView
-        android:id="@+id/timeline_item_distance_value"
-        style="@style/H4_Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="26dp"
-        app:layout_constraintBottom_toBottomOf="@+id/timeline_item_circleview_distance_indicator"
-        app:layout_constraintStart_toEndOf="@+id/timeline_item_circleview_distance_indicator"
-        app:layout_constraintTop_toTopOf="@+id/timeline_item_circleview_distance_indicator"
-        tools:text="2 KM" />
+        <com.mikhaellopez.circleview.CircleView
+            android:id="@+id/timeline_item_circleview_distance_indicator"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="31dp"
+            app:cv_color="@color/blue"
+            app:layout_constraintBottom_toBottomOf="@+id/timeline_item_steps_value"
+            app:layout_constraintStart_toEndOf="@+id/timeline_item_steps_value"
+            app:layout_constraintTop_toBottomOf="@+id/timeline_item_circleview_kcal_indicator" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/timeline_item_kcal_value"
+            style="@style/H4_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="26dp"
+            app:layout_constraintBottom_toBottomOf="@+id/timeline_item_circleview_kcal_indicator"
+            app:layout_constraintStart_toEndOf="@+id/timeline_item_circleview_kcal_indicator"
+            app:layout_constraintTop_toTopOf="@+id/timeline_item_circleview_kcal_indicator"
+            tools:text="50 KCAL" />
+
+        <TextView
+            android:id="@+id/timeline_item_distance_value"
+            style="@style/H4_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="26dp"
+            app:layout_constraintBottom_toBottomOf="@+id/timeline_item_circleview_distance_indicator"
+            app:layout_constraintStart_toEndOf="@+id/timeline_item_circleview_distance_indicator"
+            app:layout_constraintTop_toTopOf="@+id/timeline_item_circleview_distance_indicator"
+            tools:text="2 KM" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</HorizontalScrollView>

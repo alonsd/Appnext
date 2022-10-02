@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.appnext.databinding.FragmentTimelineBinding
 import com.appnext.model.ui_models.TimelineListItem
 import com.appnext.ui.screens.timeline.adapter.TimelineListAdapter
 import com.appnext.ui.screens.timeline.viewmodel.TimelineViewModel
+import com.appnext.utils.extensions.capitaliseFullyUpperCasedString
 import com.appnext.utils.extensions.launchAndRepeatWithViewLifecycle
 import com.appnext.utils.extensions.setVerticalAdapter
 import org.koin.android.ext.android.get
+import java.time.LocalDateTime
 
 class TimelineFragment : Fragment() {
 
@@ -31,7 +34,19 @@ class TimelineFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        initData()
+        initListeners()
         observeUiState()
+    }
+
+    private fun initListeners() {
+        binding.fragmentTimelineBackButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun initData() {
+        binding.fragmentTimelineMonthName.text = LocalDateTime.now().month.name.capitaliseFullyUpperCasedString()
     }
 
     private fun observeUiState() = launchAndRepeatWithViewLifecycle {

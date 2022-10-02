@@ -1,8 +1,6 @@
 package com.appnext.database.converter
 
 import androidx.room.TypeConverter
-import com.appnext.model.database.database_entities.DailyDataEntity
-import com.appnext.model.database.database_entities.DailyItemEntity
 import com.appnext.model.server_models.WeeklyDataModel
 import com.google.gson.Gson
 

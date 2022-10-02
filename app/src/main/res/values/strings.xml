@@ -21,4 +21,7 @@
     <!--    Timeline Item Viewholder-->
     <string name="viewholder_time_item_steps">Steps:</string>
     <string name="viewholder_time_item_steps_value">%1$s/%2$s</string>
+    <string name="viewholder_time_item_distance_in_meters">%1$s M</string>
+    <string name="viewholder_time_item_distance_in_kilometers">%1$s KM</string>
+    <string name="viewholder_time_item_kcal_value">%1$s KCAL</string>
 </resources>

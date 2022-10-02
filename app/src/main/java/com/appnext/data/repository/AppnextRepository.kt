@@ -3,13 +3,14 @@ package com.appnext.data.repository
 import com.appnext.R
 import com.appnext.data.source.local.source.LocalDataSource
 import com.appnext.data.source.remote.source.RemoteDataSource
-import com.appnext.model.database.database_response.WeeklyDataCombined
+import com.appnext.model.database_entities.WeeklyDataEntity
 import com.appnext.model.ui_models.TimelineListItem
 import com.appnext.model.ui_models.WeeklyProgressListItem
 import com.appnext.utils.application.App
 import com.appnext.utils.constants.TimeConstants.TWELVE_HOURS_IN_MILLIS
 import com.appnext.utils.extensions.capitaliseFullyUpperCasedString
-import com.appnext.utils.extensions.lastTimeDataFetch
+import com.appnext.utils.extensions.fetchedWeeklyDataForTheFirstTime
+import com.appnext.utils.extensions.lastTimeWeeklyDataFetch
 import com.appnext.utils.extensions.sharedPreferences
 import com.haroldadmin.cnradapter.NetworkResponse
 import java.time.LocalDateTime
@@ -81,71 +82,21 @@ class AppnextRepository(
             body = App.applicationContext()
                 .getString(R.string.dashboard_repository_general_error), code = 400
         )
-        val today = LocalDateTime.now()
-        val yesterday = LocalDateTime.now().minusDays(1)
-        val twoDaysAgo = LocalDateTime.now().minusDays(2)
-        val threeDaysAgo = LocalDateTime.now().minusDays(3)
-        val fourDaysAgo = LocalDateTime.now().minusDays(4)
-        val fiveDaysAgo = LocalDateTime.now().minusDays(5)
-        val sixDaysAgo = LocalDateTime.now().minusDays(6)
-        var timelineListItems = mutableListOf<TimelineListItem>()
-        (weeklyData as NetworkResponse.Success).body.forEach { data ->
-            timelineListItems = mutableListOf(
+        val currentWeekDateList = getCurrentWeekDateList()
+        val timelineListItems = mutableListOf<TimelineListItem>()
+        (weeklyData as NetworkResponse.Success).body.forEachIndexed { index, data ->
+            val date = currentWeekDateList[index]
+            val isToday = (date.isAfter(LocalDateTime.now().plusDays(1))  || date.isBefore(LocalDateTime.now().minusDays(1))).not()
+            timelineListItems.add(
                 TimelineListItem(
-                    sixDaysAgo.dayOfWeek.value.toString(),
-                    sixDaysAgo.dayOfWeek.name.substring(0..2)
+                    date.dayOfMonth.toString(),
+                    date.dayOfWeek.name.substring(0..2)
                         .capitaliseFullyUpperCasedString(),
                     if (data.dailyActivity >= data.dailyGoal) R.color.green else R.color.blue,
-                    data.dailyDistanceMeters.toString(), data.dailyKcal.toString(),
-                    false
-                ),
-                TimelineListItem(
-                    fiveDaysAgo.dayOfWeek.value.toString(),
-                    fiveDaysAgo.dayOfWeek.name.substring(0..2)
-                        .capitaliseFullyUpperCasedString(),
-                    if (data.dailyActivity >= data.dailyGoal) R.color.green else R.color.blue,
-                    data.dailyDistanceMeters.toString(), data.dailyKcal.toString(),
-                    false
-                ),
-                TimelineListItem(
-                    fourDaysAgo.dayOfWeek.value.toString(),
-                    fourDaysAgo.dayOfWeek.name.substring(0..2)
-                        .capitaliseFullyUpperCasedString(),
-                    if (data.dailyActivity >= data.dailyGoal) R.color.green else R.color.blue,
-                    data.dailyDistanceMeters.toString(), data.dailyKcal.toString(),
-                    false
-                ),
-                TimelineListItem(
-                    threeDaysAgo.dayOfWeek.value.toString(),
-                    threeDaysAgo.dayOfWeek.name.substring(0..2)
-                        .capitaliseFullyUpperCasedString(),
-                    if (data.dailyActivity >= data.dailyGoal) R.color.green else R.color.blue,
-                    data.dailyDistanceMeters.toString(), data.dailyKcal.toString(),
-                    false
-                ),
-                TimelineListItem(
-                    twoDaysAgo.dayOfWeek.value.toString(),
-                    twoDaysAgo.dayOfWeek.name.substring(0..2)
-                        .capitaliseFullyUpperCasedString(),
-                    if (data.dailyActivity >= data.dailyGoal) R.color.green else R.color.blue,
-                    data.dailyDistanceMeters.toString(), data.dailyKcal.toString(),
-                    false
-                ),
-                TimelineListItem(
-                    yesterday.dayOfWeek.value.toString(),
-                    yesterday.dayOfWeek.name.substring(0..2)
-                        .capitaliseFullyUpperCasedString(),
-                    if (data.dailyActivity >= data.dailyGoal) R.color.green else R.color.blue,
-                    data.dailyDistanceMeters.toString(), data.dailyKcal.toString(),
-                    true
-                ),
-                TimelineListItem(
-                    today.dayOfWeek.value.toString(),
-                    today.dayOfWeek.name.substring(0..2)
-                        .capitaliseFullyUpperCasedString(),
-                    if (data.dailyActivity >= data.dailyGoal) R.color.green else R.color.blue,
-                    data.dailyDistanceMeters.toString(), data.dailyKcal.toString(),
-                    true
+                    data.dailyDistanceMeters, data.dailyKcal.toString(),
+                    isToday,
+                    data.dailyActivity.toString(),
+                    data.dailyGoal.toString()
                 )
             )
         }
@@ -153,19 +104,32 @@ class AppnextRepository(
     }
 
 
-    private suspend fun getWeeklyData(): NetworkResponse<List<WeeklyDataCombined>, String> {
+    private suspend fun getWeeklyData(): NetworkResponse<List<WeeklyDataEntity>, String> {
         val currentTimeMillis = System.currentTimeMillis()
-        if (sharedPreferences.lastTimeDataFetch - currentTimeMillis >= TWELVE_HOURS_IN_MILLIS) {
+        val twelveHoursPassed = sharedPreferences.lastTimeWeeklyDataFetch - currentTimeMillis >= TWELVE_HOURS_IN_MILLIS
+        if (twelveHoursPassed || sharedPreferences.fetchedWeeklyDataForTheFirstTime.not()) {
             val weeklyData = remoteDataSource.getWeeklyData()
             if (weeklyData is NetworkResponse.Error) return NetworkResponse.ServerError(
                 body = App.applicationContext()
                     .getString(R.string.dashboard_repository_general_error), code = 400
             )
-            sharedPreferences.lastTimeDataFetch = currentTimeMillis
+            sharedPreferences.fetchedWeeklyDataForTheFirstTime = true
+            sharedPreferences.lastTimeWeeklyDataFetch = currentTimeMillis
             localDataSource.insertWeeklyData((weeklyData as NetworkResponse.Success).body)
         }
         return NetworkResponse.Success(localDataSource.getWeeklyData(), code = 200)
     }
+
+    private fun getCurrentWeekDateList(): MutableList<LocalDateTime> =
+        mutableListOf(
+            LocalDateTime.now(),
+            LocalDateTime.now().minusDays(1),
+            LocalDateTime.now().minusDays(2),
+            LocalDateTime.now().minusDays(3),
+            LocalDateTime.now().minusDays(4),
+            LocalDateTime.now().minusDays(5),
+            LocalDateTime.now().minusDays(6),
+        )
 
 }
 
