@@ -1,10 +1,13 @@
 package com.appnext.utils.extensions
 
-import android.view.View
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -19,14 +22,24 @@ inline fun Fragment.launchAndRepeatWithViewLifecycle(
     }
 }
 
-fun View.setVisiblyAsGone(){
-    visibility = View.GONE
+fun <T, VH : RecyclerView.ViewHolder>
+        RecyclerView.setAdapter(
+    context: Context,
+    adapter: ListAdapter<T, VH>
+) {
+    this.adapter = adapter
+    this.setHasFixedSize(true)
+    this.layoutManager = LinearLayoutManager(context)
 }
-fun View.setVisiblyAsVisible(){
-    visibility = View.VISIBLE
-}
-fun View.setVisiblyAsInvisible(){
-    visibility = View.INVISIBLE
+
+fun <T, VH : RecyclerView.ViewHolder>
+        RecyclerView.setHorizontalAdapter(
+    context: Context,
+    adapter: ListAdapter<T, VH>
+) {
+    this.adapter = adapter
+    this.setHasFixedSize(true)
+    this.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 }
 
 

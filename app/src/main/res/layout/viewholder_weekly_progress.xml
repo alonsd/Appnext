@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+
+    <com.tistory.zladnrms.roundablelayout.RoundableLayout
+        android:id="@+id/weekly_progress_activity"
+        android:layout_width="12dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        app:backgroundColor="@color/blue"
+        app:cornerLeftTop="60dp"
+        app:cornerRightTop="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.daasuu.bl.BubbleLayout
+        android:id="@+id/bubblelayout_weekly_progress_steps_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="-4dp"
+        android:elevation="2dp"
+        tools:visibility="gone"
+        android:visibility="gone"
+        android:padding="8dp"
+        app:bl_arrowDirection="right"
+        app:bl_arrowHeight="8dp"
+        app:bl_arrowPosition="16dp"
+        app:bl_arrowWidth="8dp"
+        app:bl_bubbleColor="@color/lightBlue"
+        app:bl_cornersRadius="26dp"
+        app:layout_constraintBottom_toBottomOf="@+id/weekly_progress_activity"
+        app:layout_constraintEnd_toStartOf="@+id/weekly_progress_activity"
+        app:layout_constraintTop_toTopOf="@+id/weekly_progress_activity"
+        app:layout_constraintVertical_bias="0.200">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="4dp"
+            tools:text="5000/4000 steps " />
+
+    </com.daasuu.bl.BubbleLayout>
+
+    <com.daasuu.bl.BubbleLayout
+        android:id="@+id/bubblelayout_weekly_progress_steps_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:padding="8dp"
+        app:bl_arrowDirection="left"
+        android:layout_marginStart="-4dp"
+        tools:visibility="gone"
+        android:visibility="gone"
+        app:bl_arrowHeight="8dp"
+        app:bl_arrowPosition="16dp"
+        app:bl_arrowWidth="8dp"
+        app:bl_bubbleColor="@color/lightBlue"
+        app:bl_cornersRadius="26dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bubblelayout_weekly_progress_steps_left"
+        app:layout_constraintStart_toEndOf="@+id/weekly_progress_activity"
+        app:layout_constraintTop_toTopOf="@+id/bubblelayout_weekly_progress_steps_left">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="4dp"
+            tools:text="5000/4000 steps " />
+
+    </com.daasuu.bl.BubbleLayout>
+
+
+    <com.tistory.zladnrms.roundablelayout.RoundableLayout
+        android:id="@+id/weekly_progress_goal"
+        android:layout_width="12dp"
+        android:layout_height="150dp"
+        app:backgroundColor="@color/green"
+        app:cornerLeftTop="60dp"
+        app:cornerRightTop="60dp"
+        app:layout_constraintBottom_toBottomOf="@+id/weekly_progress_activity"
+        app:layout_constraintStart_toEndOf="@+id/weekly_progress_activity" />
+
+    <TextView
+        android:id="@+id/weekly_progress_day_name"
+        style="@style/H2_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/weekly_progress_goal"
+        app:layout_constraintStart_toStartOf="@+id/weekly_progress_activity"
+        app:layout_constraintTop_toBottomOf="@+id/weekly_progress_activity"
+        tools:text="Sun" />
+
+
+    <View
+        android:id="@+id/weekly_progress_current_day_indicator"
+        android:layout_width="24dp"
+        android:layout_height="4dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/blue"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/weekly_progress_day_name"
+        app:layout_constraintStart_toStartOf="@+id/weekly_progress_day_name"
+        app:layout_constraintTop_toBottomOf="@+id/weekly_progress_day_name"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/dashboard_view_bottom_separator"
+        android:layout_width="48dp"
+        android:layout_height="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/separator_view_color"
+        app:layout_constraintTop_toBottomOf="@+id/weekly_progress_current_day_indicator"
+        tools:layout_editor_absoluteX="48dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

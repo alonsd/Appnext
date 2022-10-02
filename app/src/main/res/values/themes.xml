@@ -1,14 +1,19 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.Appnext" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Appnext" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/blue</item>
+        <item name="colorSecondaryVariant">@color/lightBlue</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Main_Background">
+        <item name="android:background">@color/white</item>
     </style>
 </resources>

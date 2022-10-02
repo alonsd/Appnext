@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/text_view_daily_goal"
-        style="@style/H2_Title"
+        style="@style/H2_Title_Black_Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36.5dp"
@@ -30,7 +30,7 @@
 
     <TextView
         android:id="@+id/text_view_daily_goal_subtitle"
-        style="@style/H3_Title"
+        style="@style/H4_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dashboard_fragment_be_active_be_healthy_set_goals"
@@ -38,11 +38,11 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_daily_goal" />
 
     <View
-        android:id="@+id/dashboard_view_separator"
+        android:id="@+id/dashboard_view_top_separator"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="16dp"
-        android:background="#F2F2F2"
+        android:background="@color/separator_view_color"
         app:layout_constraintTop_toBottomOf="@+id/text_view_daily_goal_subtitle"
         tools:layout_editor_absoluteX="48dp" />
 
@@ -57,11 +57,11 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/text_view_daily_goal_subtitle"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_view_separator" />
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_view_top_separator" />
 
     <TextView
         android:id="@+id/text_view_weekly_progress_subtitle"
-        style="@style/H3_Title"
+        style="@style/H4_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dashboard_fragment_set_realistic_goals"
@@ -69,7 +69,7 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_weekly_progress" />
 
     <com.mikhaellopez.circleview.CircleView
-        android:id="@+id/circleview_activity_color"
+        android:id="@+id/timeline_item_circleview_kcal_indicator"
         android:layout_width="12dp"
         android:layout_height="12dp"
         android:layout_marginEnd="3dp"
@@ -80,7 +80,7 @@
 
     <TextView
         android:id="@+id/text_view_activity_color_explanation"
-        style="@style/H4_Title"
+        style="@style/H5_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="13dp"
@@ -102,7 +102,7 @@
 
     <TextView
         android:id="@+id/text_view_daily_goal_color_explanation"
-        style="@style/H4_Title"
+        style="@style/H5_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -112,7 +112,7 @@
 
     <TextView
         android:id="@+id/text_view_timeline"
-        style="@style/H3_Title"
+        style="@style/H4_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -123,6 +123,18 @@
         android:textColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/text_view_weekly_progress" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_weekly_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_daily_goal_color_explanation"
+        tools:listitem="@layout/viewholder_weekly_progress" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

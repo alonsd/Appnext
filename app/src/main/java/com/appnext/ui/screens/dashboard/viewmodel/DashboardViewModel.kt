@@ -1,9 +1,9 @@
-package com.appnext.ui.application_flow.dashboard.viewmodel
+package com.appnext.ui.screens.dashboard.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.appnext.data.repository.MainRepository
-import com.appnext.model.server_models.WeeklyDataModel
+import com.appnext.data.repository.DashboardRepository
+import com.appnext.model.ui_models.WeeklyProgressListItem
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class DashboardViewModel(private val mainRepository: MainRepository) : ViewModel() {
+class DashboardViewModel(private val mainRepository: DashboardRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
     val uiState = _uiState.asStateFlow()
@@ -26,7 +26,7 @@ class DashboardViewModel(private val mainRepository: MainRepository) : ViewModel
         when (val response = mainRepository.getWeeklyData()) {
             is NetworkResponse.Success -> {
                 _uiState.update {
-                    it.copy(weeklyData = response.body.weeklyData, state = UiState.State.Data)
+                    it.copy(weeklyData = response.body, state = UiState.State.Data)
                 }
             }
 
@@ -39,7 +39,7 @@ class DashboardViewModel(private val mainRepository: MainRepository) : ViewModel
     }
 
     data class UiState(
-        val weeklyData: List<WeeklyDataModel.WeeklyData> = emptyList(),
+        val weeklyData: List<WeeklyProgressListItem> = emptyList(),
         val errorMessage: String = "",
         val state: State = State.Initial
     ) {
@@ -51,7 +51,7 @@ class DashboardViewModel(private val mainRepository: MainRepository) : ViewModel
     }
 
     sealed interface UiEvent{
-        object NavigateToDailyActivityDetails
+        object TimelineClicked
     }
 
     sealed interface UiAction {

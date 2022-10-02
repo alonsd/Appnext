@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.appnext.ui.application_flow.dashboard.fragment.DashboardFragment"
+        android:name="com.appnext.ui.screens.dashboard.fragment.DashboardFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_dashboard" />
 </navigation>

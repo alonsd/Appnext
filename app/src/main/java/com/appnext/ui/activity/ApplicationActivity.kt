@@ -7,6 +7,6 @@ import com.appnext.R
 class ApplicationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.application_activity)
+        setContentView(R.layout.activity_application)
     }
 }
