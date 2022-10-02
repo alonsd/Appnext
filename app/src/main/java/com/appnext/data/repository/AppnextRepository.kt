@@ -1,14 +1,15 @@
 package com.appnext.data.repository
 
-import android.net.Network
 import com.appnext.R
 import com.appnext.data.source.local.source.LocalDataSource
 import com.appnext.data.source.remote.source.RemoteDataSource
 import com.appnext.model.database.database_response.WeeklyDataCombined
-import com.appnext.model.server_models.WeeklyDataModel
 import com.appnext.model.ui_models.WeeklyProgressListItem
 import com.appnext.utils.application.App
+import com.appnext.utils.constants.TimeConstants.TWELVE_HOURS_IN_MILLIS
 import com.appnext.utils.extensions.capitaliseFullyUpperCasedString
+import com.appnext.utils.extensions.lastTimeDataFetch
+import com.appnext.utils.extensions.sharedPreferences
 import com.haroldadmin.cnradapter.NetworkResponse
 import java.time.LocalDateTime
 
@@ -81,13 +82,10 @@ class AppnextRepository(
             body = App.applicationContext()
                 .getString(R.string.dashboard_repository_general_error), code = 400
         )
-        localDataSource.insertWeeklyData((weeklyData as NetworkResponse.Success).body)
+        if (sharedPreferences.lastTimeDataFetch - currentTimeMillis >= TWELVE_HOURS_IN_MILLIS) {
+            localDataSource.insertWeeklyData((weeklyData as NetworkResponse.Success).body)
+        }
         return NetworkResponse.Success(localDataSource.getWeeklyData(), code = 200)
-//        if (sharedPreferences.lastTimeDataFetch - currentTimeMillis >= TWELVE_HOURS_IN_MILLIS){
-//
-//        } else {
-//
-//        }
     }
 
 }

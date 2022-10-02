@@ -10,14 +10,8 @@ import com.appnext.model.database.database_response.WeeklyDataCombined
 @Dao
 interface AppNextDao {
 
-    @Query("select * from (select dailyDistanceMeters, dailyKcal from DailyData), (select dailyActivity, dailyGoal from DailyItem)")
+    @Query("""select * from (select dailyDistanceMeters, dailyKcal from DailyData), (select dailyActivity, dailyGoal from DailyItem)""")
     suspend fun getWeeklyData() : List<WeeklyDataCombined>
-
-    @Query("select * from DailyData")
-    suspend fun getDailyDataEntities() : List<DailyDataEntity>
-
-    @Query("select * from DailyItem")
-    suspend fun getDailyItemEntities() : List<DailyItemEntity>
 
     @Insert
     suspend fun insertDailyDataEntity(entity : DailyDataEntity)

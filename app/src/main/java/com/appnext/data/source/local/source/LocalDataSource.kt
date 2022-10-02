@@ -9,17 +9,7 @@ import com.appnext.model.server_models.WeeklyDataModel
 
 class LocalDataSource(private val appNextDao: AppNextDao) {
 
-    suspend fun getWeeklyData(): List<WeeklyDataCombined> {
-//        val dailyDataEntities = appNextDao.getDailyDataEntities()
-//        val dailyItemEntities = appNextDao.getDailyItemEntities()
-//        var weeklyDataList = mutableListOf<WeeklyDataModel.WeeklyData>()
-//        dailyDataEntities.forEach {
-//            weeklyDataList = mutableListOf(
-//
-//            )
-//        }
-        return appNextDao.getWeeklyData()
-    }
+    suspend fun getWeeklyData(): List<WeeklyDataCombined> = appNextDao.getWeeklyData()
 
     suspend fun insertWeeklyData(weeklyDataModel: WeeklyDataModel) {
         weeklyDataModel.weeklyData.forEach { data ->
