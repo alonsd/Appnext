@@ -2,7 +2,6 @@ package com.appnext.ui.screens.timeline.adapter
 
 import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.appnext.R
 import com.appnext.databinding.ViewholderTimelineItemBinding
@@ -30,8 +29,14 @@ class TimelineListItemViewHolder(private val binding: ViewholderTimelineItemBind
             }
         binding.timelineItemCircularprogressview.strokeColor = ContextCompat.getColor(binding.root.context, model.itemColor)
         binding.timelineItemCurrentDayIndicator.isInvisible = model.isToday.not()
-        var progress = (model.dailyGoal.toFloat() / model.dailyActivity.toFloat()) / 10
-        if (progress > 1.00) progress = 1.00f // TODO: continue from progress
+        val progress =
+            if (model.dailyActivity >= model.dailyGoal)
+                100f
+            else if (model.dailyActivity.toFloat() == 0f)
+                0f
+            else
+                (model.dailyActivity.toFloat() / model.dailyGoal.toFloat()) * 100f
         binding.timelineItemCircularprogressview.progress = progress
     }
+
 }

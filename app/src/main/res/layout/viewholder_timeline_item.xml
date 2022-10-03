@@ -61,7 +61,8 @@
         <com.owl93.dpb.CircularProgressView
             android:id="@+id/timeline_item_circularprogressview"
             android:layout_width="40dp"
-            app:maxValue="1.00"
+            app:maxValue="100.0"
+            app:progress="20.0"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/timeline_item_separator_view"
