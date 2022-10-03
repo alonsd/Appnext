@@ -6,7 +6,8 @@ data class WeeklyProgressListItem(
     val dayOfWeek: String,
     val dailyActivity: Int,
     val dailyGoal: Int,
-    val isToday : Boolean
+    val isToday : Boolean,
+    val highestValue : Int
 ) : DefaultAdapterDiffUtilCallback.ModelWithId {
     override fun fetchId(): String = dayOfWeek
 }
