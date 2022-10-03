@@ -25,10 +25,6 @@ var SharedPreferences.fetchedWeeklyDataForTheFirstTime
         }
     }
 
-
-val Fragment.sharedPreferences: SharedPreferences
-    get() = requireActivity().getSharedPreferences(APPNEXT_SHARED_PREFERENCES, MODE_PRIVATE)
-
 val sharedPreferences: SharedPreferences
     get() = App.applicationContext().getSharedPreferences(APPNEXT_SHARED_PREFERENCES, MODE_PRIVATE)
 

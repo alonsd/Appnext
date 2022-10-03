@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.appnext.data.repository.AppnextRepository
 import com.appnext.model.ui_models.TimelineListItem
-import com.appnext.ui.screens.dashboard.viewmodel.DashboardViewModel
 import com.haroldadmin.cnradapter.NetworkResponse
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

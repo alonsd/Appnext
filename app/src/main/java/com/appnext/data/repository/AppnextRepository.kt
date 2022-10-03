@@ -24,7 +24,7 @@ class AppnextRepository(
             body = App.applicationContext()
                 .getString(R.string.dashboard_repository_general_error), code = 400
         )
-        val currentWeekDateList = getCurrentWeekDateList()
+        val currentWeekDateList = getCurrentWeekDateList().apply { reverse() }
         val weeklyProgressListItems = mutableListOf<WeeklyProgressListItem>()
         val weeklyDataEntities = (weeklyData as NetworkResponse.Success).body
         val highestValue = weeklyDataEntities
@@ -32,7 +32,7 @@ class AppnextRepository(
             .toMutableList()
             .apply { addAll(weeklyDataEntities.map { it.dailyGoal }) }
             .findHighestValue()
-        weeklyDataEntities.forEachIndexed {index,  data ->
+        weeklyDataEntities.forEachIndexed { index, data ->
             val date = currentWeekDateList[index]
             val isToday = (date.isAfter(LocalDateTime.now().plusDays(1)) || date.isBefore(LocalDateTime.now().minusDays(1))).not()
             weeklyProgressListItems.add(
